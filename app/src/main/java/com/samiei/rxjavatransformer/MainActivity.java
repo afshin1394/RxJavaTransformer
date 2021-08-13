@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         ApiServiceOwghat apiServiceOwghat = ApiClientOwghat.getInstance().getClientServiceOwghat();
 
         apiServiceOwghat.getOwghatByLatLong(34.0893,34.0824)
+                .compose(RxTransformer.parseHttpErrors("MainActivity.class","MainActivity","onCreate"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<OwghatResult>>() {
